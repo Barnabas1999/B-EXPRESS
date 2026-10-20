@@ -1,101 +1,82 @@
-<!-- WORKING CONTACT FORM -->
-<section id="contact" style="padding:40px 20px; background:#f5f5f5; text-align:center;">
-  <h2>Contact Me</h2>
-  <p>Have a project? Send me a message!</p>
-  
-  <form action="https://formspree.io/f/xdealgan" method="POST" style="max-width:400px; margin:20px auto;">
-    <input type="text" name="name" placeholder="Your Name" required style="width:100%; padding:12px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
-    <input type="email" name="email" placeholder="Your Email" required style="width:100%; padding:12px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
-    <textarea name="message" placeholder="Your Message" required style="width:100%; padding:12px; margin:8px 0; border-radius:6px; border:1px solid #ccc; height:100px;"></textarea>
-    <button type="submit" style="width:100%; padding:12px; background:#000; color:white; border:none; border-radius:6px; font-weight:bold; cursor:pointer;">Send Message</button>
-  </form>
-
-  <a href="https://wa.me/2349122857147?text=Hi%20B-TECH%20I%20saw%20your%20portfolio%20https://b-tech-one.vercel.app" 
-  style="display:block; max-width:400px; margin:20px auto; background:#25D366; color:white; padding:12px; text-align:center; border-radius:6px; text-decoration:none; font-weight:bold;">
-  Or Chat on WhatsApp
-  </a>
-</section>
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>B Tech - Developer</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f5f5f5;
-            color: #222;
-        }
-
-        header {
-            background: #0a192f;
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        section {
-            padding: 30px;
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            margin-top: 20px;
-            border-radius: 10px;
-        }
-
-        .btn {
-            background: #00d1ff;
-            color: black;
-            padding: 12px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .skill {
-            display: inline-block;
-            background: #eee;
-            padding: 6px 12px;
-            margin: 5px;
-            border-radius: 20px;
-        }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B Tech</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#f8f9fb;padding-bottom:80px}
+header{background:#0f172a;color:#fff;padding:18px 20px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center}
+.hero{padding:24px 20px;background:#0f172a;color:#fff}
+.tabs{display:flex;gap:8px;padding:12px 20px;overflow:auto}
+.tab{padding:9px 16px;border-radius:999px;background:#e2e8f0;border:0;font-weight:700}
+.tab.active{background:#0f172a;color:#fff}
+#gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;padding:20px}
+.card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.06);position:relative}
+.card img{width:100%;height:180px;object-fit:cover}
+.card .info{padding:10px}.card .info h4{font-size:14px}.card .info p{font-size:12px;color:#666}
+.card .select{position:absolute;top:8px;left:8px;width:24px;height:24px}
+.badge{position:absolute;top:8px;right:8px;background:#0f172a;color:#fff;font-size:10px;padding:4px 8px;border-radius:999px}
+.admin-panel{background:#fff;margin:20px;border-radius:16px;padding:16px;display:none;border:2px dashed #0f172a}
+.admin-panel.show{display:block}
+input,textarea,select{width:100%;padding:11px;border-radius:10px;border:1px solid #ddd;margin-top:8px}
+.btn{padding:11px 16px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+.btn-black{background:#0f172a;color:#fff}.btn-green{background:#25D366;color:#fff}.btn-outline{background:#fff;border:1px solid #ddd}
+.footer-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #eee;padding:10px 14px;display:flex;gap:8px}
+.footer-bar .count{flex:1;font-weight:800;display:flex;align-items:center}
+</style>
 </head>
-
 <body>
+<header><h1>⚡ B TECH</h1><button class="btn" style="background:#1e293b;color:#fff;font-size:12px" onclick="adminLogin()">Admin</button></header>
+<div class="hero"><h2>B Tech Store</h2><p style="color:#94a3b8;margin-top:6px">Pick items ✓ then send to us via WhatsApp</p><p style="font-size:12px;margin-top:6px">📞 +2349122857147</p></div>
 
-    <header>
-        <h1>Hi, I'm [B TECH]</h1>
-        <p>Junior Developer | Data Science | Port Harcourt, Nigeria</p>
-        <a class="btn" href="https://wa.me/2349122857147">Hire Me on WhatsApp</a>
-    </header>
+<div class="admin-panel" id="adminPanel">
+<h3>Admin - Add Product (Only You)</h3>
+<input id="pName" placeholder="Name"><select id="pCategory"><option>Product</option><option>Book</option><option>Gallery</option></select>
+<textarea id="pDesc" placeholder="Description + Price"></textarea>
+<input type="file" id="pFile" accept="image/*" multiple>
+<input id="pImageUrl" placeholder="Or image URL">
+<div style="margin-top:10px;display:flex;gap:8px">
+<button class="btn btn-black" onclick="addProduct()">Save</button>
+<button class="btn btn-outline" onclick="document.getElementById('adminPanel').classList.remove('show')">Close</button>
+<button class="btn btn-outline" style="color:red" onclick="clearAll()">Delete All</button>
+</div>
+</div>
 
-    <section>
-        <h2>What I Do</h2>
-        <p>✓ Build Simple Websites<br>✓ Clean and Analyze Datasets<br>✓ Create Excel Reports and Dashboards<br>✓ Python
-            Scripts and Automation</p>
-    </section>
+<div class="tabs">
+<button class="tab active" onclick="filterCat('All',this)">All</button>
+<button class="tab" onclick="filterCat('Product',this)">Products</button>
+<button class="tab" onclick="filterCat('Book',this)">Books</button>
+<button class="tab" onclick="filterCat('Gallery',this)">Gallery</button>
+</div>
+<div id="gallery"></div>
+<div class="footer-bar"><div class="count" id="count">0 selected</div><button class="btn btn-outline" onclick="clearSelection()">Clear</button><button class="btn btn-green" onclick="sendWhatsApp()">WhatsApp</button><button class="btn btn-black" onclick="sendEmail()">Email</button></div>
 
-    <section>
-        <h2>My Skills</h2>
-        <span class="skill">HTML</span>
-        <span class="skill">CSS</span>
-        <span class="skill">Python</span>
-        <span class="skill">Pandas</span>
-        <span class="skill">Excel</span>
-        <span class="skill">Data Analysis</span>
-    </section>
+<script>
+const SELLER_PHONE="2349122857147"; const SELLER_EMAIL="barnabaspaul43@gmail.com";
+const ADMIN_PASSWORD="BTECH2026"; // CHANGE THIS TO YOUR OWN PASSWORD
+let isAdmin=false;
 
-    <section>
-        <h2>My Projects</h2>
-        <p><b>1. Sales Dashboard</b> - Analyzed sales data for a PH business.</p>
-        <p><b>2. Business Website</b> - Built for a local store.</p>
-        <p>Contact me to see samples.</p>
-    </section>
+let products=JSON.parse(localStorage.getItem('btechProducts')||'null')||[
+{id:1,name:'Powerbank Sample',desc:'₦12,000',cat:'Product',img:'https://images.unsplash.com/photo-1609592424308-8e7dbfa1b1cc?w=600'}
+];
+let selected=new Set(); let currentFilter='All';
 
+function adminLogin(){
+  const p=prompt('Enter Admin Password for B Tech:');
+  if(p===ADMIN_PASSWORD){ isAdmin=true; document.getElementById('adminPanel').classList.add('show'); alert('Admin unlocked - You can now add images'); }
+  else if(p){ alert('Wrong password - Only owner can add'); }
+}
+function render(){const g=document.getElementById('gallery');g.innerHTML='';products.filter(p=>currentFilter==='All'||p.cat===currentFilter).forEach(p=>{const d=document.createElement('div');d.className='card';d.innerHTML=`<input type='checkbox' class='select' ${selected.has(p.id)?'checked':''} onchange='toggleSelect(${p.id})'><span class='badge'>${p.cat}</span><img src='${p.img}' onclick='toggleSelect(${p.id})'><div class='info'><h4>${p.name}</h4><p>${p.desc}</p></div>`;g.appendChild(d);});document.getElementById('count').textContent=`${selected.size} selected`;}
+function toggleSelect(id){if(selected.has(id))selected.delete(id);else selected.add(id);render();}
+function clearSelection(){selected.clear();render();}
+function clearAll(){if(!isAdmin){alert('Admin only');return;}if(confirm('Delete all?')){products=[];localStorage.setItem('btechProducts',JSON.stringify(products));render();}}
+function filterCat(c,el){currentFilter=c;document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));el.classList.add('active');render();}
+function addProduct(){if(!isAdmin){alert('Admin only');return;}const name=document.getElementById('pName').value.trim();const desc=document.getElementById('pDesc').value.trim();const cat=document.getElementById('pCategory').value;const url=document.getElementById('pImageUrl').value.trim();const files=document.getElementById('pFile').files;if(!name){alert('Name needed');return;}const addOne=(img)=>{products.unshift({id:Date.now()+Math.random(),name,desc,cat,img});};const finish=()=>{localStorage.setItem('btechProducts',JSON.stringify(products));render();alert('Added! Now deploy to Vercel again');};if(files.length>0){let l=0;Array.from(files).forEach(f=>{const r=new FileReader();r.onload=e=>{addOne(e.target.result);l++;if(l===files.length)finish();};r.readAsDataURL(f);});}else{addOne(url||'https://via.placeholder.com/600?text='+name);finish();}}
+function getSel(){return products.filter(p=>selected.has(p.id));}
+function sendWhatsApp(){if(selected.size===0){alert('Select products');return;}const items=getSel().map((p,i)=>`${i+1}. ${p.name} - ${p.desc}`).join('\n');window.open(`https://wa.me/${SELLER_PHONE}?text=${encodeURIComponent(`Hello B Tech!\n\nI want:\n${items}\n\nFrom website`)}`,'_blank');}
+function sendEmail(){if(selected.size===0){alert('Select products');return;}const items=getSel().map((p,i)=>`${i+1}. ${p.name} - ${p.desc}`).join('\n');window.location.href=`mailto:${SELLER_EMAIL}?subject=Order B Tech&body=${encodeURIComponent(items)}`;}
+render();
+</script>
 </body>
-
 </html>
